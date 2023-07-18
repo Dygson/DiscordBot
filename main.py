@@ -71,7 +71,20 @@ class YTDLSource(discord.PCMVolumeTransformer):
         
 
 #dodawanie komend do dołączenia/wyjścia do/z kanału i do sterowania muzyką 
-@bot.command(name = 'join')
+
+@bot.tree.command(name = "join", description="Przywołuje bota na twój kanał")
+async def join(ctx: discord.Interaction, member: discord.Member):
+    try:
+        if not getattr(ctx.user.voice, "channel", None):
+            await ctx.response.send_message(f"{ctx.user.mention} dołącz najpierw do kanału głosowego!!!")
+            return
+        else:
+            channel = ctx.user.voice.channel
+            await channel.connect()
+    except Exception as e:
+         print(ctx.user.voice.channel.id)
+
+'''@bot.command(name = 'join')
 async def join(ctx):
     if not ctx.message.author.voice:
         await ctx.send("{} nie jest połączony z kanałem głosowym".format(ctx.message.author.name))
@@ -79,9 +92,10 @@ async def join(ctx):
     else:
         channel = ctx.message.author.voice.channel
         await channel.connect()
-
-@bot.command(name = 'playSong')
-async def play(ctx, url):
+'''
+#TU SKONCZYLES
+@bot.tree.command(name = 'play', description="Odtwarza muzyke z podanego linka z yt")
+async def play(ctx: discord.Interaction, url: discord.TextInput):
     global removeFile
     server = ctx.message.guild
     voice_channel = server.voice_client
@@ -148,7 +162,7 @@ async def stop(ctx):
 
 @bot.tree.command(name = "powitanie", description="Nie masz przyjaciół? to pozwól że chociaż bot Cię przywita :D")
 async def powitajka(interaction: discord.Interaction):
-    await interaction.response.send_message(f"Siemka {interaction.user.mention}, co tam byq?", ephemeral=True)
+    await interaction.response.send_message(f"Siemka {interaction.user.mention}, co tam byq?")
 
 #Odpisywanie, wykonywanie akcji po wysłaniu wiadomości z daną frazą
 '''@bot.event  
