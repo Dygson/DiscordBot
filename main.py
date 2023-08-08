@@ -15,7 +15,7 @@ load_dotenv()
 DISCORD_TOKEN = os.getenv(Token)
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 client = discord.Client(intents=discord.Intents.all())
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.voice_states = True
 intents.members = True
 intents.guilds = True
@@ -37,17 +37,19 @@ async def on_ready():
     except Exception as e:
         print(e)
 
+
 @client.event
 async def on_raw_reaction_add(payload):
     message_id = 1133020474427850883
     channel_id = 1129806701302906934
-    if payload.message_id == message_id and payload.emoji.name == "👍": # OR paylod.emoji.name == u"\U0001F44D"
+    if payload.message_id == message_id and payload.emoji.name == "✅": # OR paylod.emoji.name == u"\U0001F44D"
         channel = await client.fetch_channel(channel_id)
         await channel.send("OK")
 
-@client.event
+@bot.event
 async def on_reaction_add(reaction, user):
     await reaction.message.channel.send(f'{user} reacted with {reaction.emoji}')
+
 
 
 GUILD_VC_TIMER = {}
