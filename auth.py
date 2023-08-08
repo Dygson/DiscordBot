@@ -1,2 +1,3 @@
-Token = "MTEzMTE1NTM4NzM1ODQwMDUyNA.GQz3oy.ZF5JKWSodEWuGOHyGidrRnEsq2vKmLqVzdCJhA"
-outhURL = "https://discord.com/api/oauth2/authorize?client_id=1131155387358400524&permissions=8&scope=applications.commands%20bot"
+Token = ""
+outhURL = ""
+#Removed data from this file bcs of setting respository public
